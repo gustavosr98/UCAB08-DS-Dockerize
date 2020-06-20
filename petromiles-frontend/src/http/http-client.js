@@ -9,11 +9,11 @@ const httpClient = axios.create({
   baseURL:
     (!!baseDomain && `http://${baseDomain}:${port}/${suffix}`) ||
     "http://localhost:3000/api/v1",
-  timeout: process.env.VUE_APP_PETROMILES_API_TIMEOUT || 30000,
+  timeout: parseInt(process.env.VUE_APP_PETROMILES_API_TIMEOUT) || 30000,
 });
 
 httpClient.interceptors.response.use(
-  response => response.data,
+  (response) => response.data,
   errorRespondeHandler
 );
 

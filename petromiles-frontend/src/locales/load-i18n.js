@@ -5,7 +5,7 @@ const baseDomain = process.env.VUE_APP_PETROMILES_API_URL;
 const suffix = "api/v1";
 const port = process.env.VUE_APP_PETROMILES_API_PORT;
 
-console.log(baseDomain);
+console.log({ baseDomain });
 
 // Don't forget to add your tags
 // IMPORTANT! Each tag must have the name of the component
@@ -15,26 +15,27 @@ const httpClient = axios.create({
   baseURL:
     (!!baseDomain && `http://${baseDomain}:${port}/${suffix}`) ||
     "http://localhost:3000/api/v1",
-  timeout: process.env.VUE_APP_PETROMILES_API_TIMEOUT || 30000,
+  timeout: parseInt(process.env.VUE_APP_PETROMILES_API_TIMEOUT) || 30000,
 });
-httpClient.interceptors.response.use(response => response.data);
+httpClient.interceptors.response.use((response) => response.data);
 
 async function loadLocalesRemotelly() {
-  LANGS.map(lang => {
+  LANGS.map((lang) => {
     httpClient
       .get(`/language/${lang}`)
-      .then(terms => {
+      .then((terms) => {
         termsGroupedByTags = groupTermsByTags(terms);
         fs.writeFile(
           __dirname + `/${lang}.json`,
           JSON.stringify(termsGroupedByTags),
-          err => {
+          (err) => {
             if (err) console.log(`Error writing file ${lang}.json:`, err);
             else console.log(`Got ${lang}.json locale`);
           }
         );
       })
-      .catch(err => {
+      .catch((err) => {
+        console.log(err);
         console.log(
           `Error writing file ${lang}.json | Please SERVE FIRST BACKEND !!`
         );
@@ -46,11 +47,11 @@ function groupTermsByTags(terms) {
   let termsGroupedByTags = {};
   const tags = getTags(terms);
 
-  tags.map(tag => {
+  tags.map((tag) => {
     termsGroupedByTags[tag] = {};
     terms
-      .filter(term => !!term.tags.includes(tag))
-      .map(term => {
+      .filter((term) => !!term.tags.includes(tag))
+      .map((term) => {
         termsGroupedByTags[tag][term.term] =
           term.plural.length > 0
             ? `${term.translation.content.one} | ${term.translation.content.other} | {count} ${term.translation.content.other}`
@@ -62,13 +63,13 @@ function groupTermsByTags(terms) {
 }
 
 function getTags(terms) {
-  return mergeArrays(...terms.map(term => term.tags));
+  return mergeArrays(...terms.map((term) => term.tags));
 }
 
 function mergeArrays(...arrays) {
   let jointArray = [];
 
-  arrays.forEach(array => {
+  arrays.forEach((array) => {
     jointArray = [...jointArray, ...array];
   });
   const uniqueArray = jointArray.reduce((newArray, item) => {

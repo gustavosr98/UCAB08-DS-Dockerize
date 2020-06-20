@@ -9,4 +9,4 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 
-CMD ["npm", "run", "serve"]
+CMD ["sh", "-c", "npm run i18n:load && npm run serve"]

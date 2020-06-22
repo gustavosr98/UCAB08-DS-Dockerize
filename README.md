@@ -116,7 +116,7 @@ VUE_APP_I18N_LOCALE=en
 VUE_APP_I18N_FALLBACK_LOCALE=en
 ```
 
-3. Levantar servicio de Frontend con Docker
+2. Levantar servicio de Frontend con Docker
 
 ```bash
 cd petromiles-frontend

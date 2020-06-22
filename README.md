@@ -4,6 +4,9 @@
   <img 
   alt="PetroMiles Round Logo"
   width="192" src="petromiles-frontend/public/img/icons/android-chrome-192x192.png">
+  <img 
+  alt="Docker"
+  width="220" src="https://despliegue.codeandcoke.com/lib/exe/fetch.php?cache=&w=900&h=802&tok=a0a92a&media=apuntes:docker.png">
 </p>
 
 ## Levantar servicios con contenedores

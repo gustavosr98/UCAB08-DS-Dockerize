@@ -121,7 +121,7 @@ VUE_APP_I18N_FALLBACK_LOCALE=en
 ```bash
 cd petromiles-frontend
 docker build -t petromiles-frontend .
-docker run --publish 8000:8080 --network host --env-file=.env petromiles-frontend
+docker run --publish 8080:8080 --network host --env-file=.env petromiles-frontend
 ```
 
 ## Integrantes
